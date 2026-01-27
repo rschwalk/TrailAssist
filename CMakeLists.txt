@@ -61,11 +61,6 @@ add_subdirectory(configured_files)
 # Adding the src:
 add_subdirectory(src)
 
-# Create unified web deployment directory (for WASM builds)
-if(EMSCRIPTEN)
-  TrailAssist_create_web_dist()
-endif()
-
 # Don't even look at tests if we're not top level
 if(NOT PROJECT_IS_TOP_LEVEL)
   return()
@@ -75,7 +70,6 @@ endif()
 include(CTest)
 
 if(BUILD_TESTING)
-  message(AUTHOR_WARNING "Building Tests. Be sure to check out test/constexpr_tests.cpp for constexpr testing")
   add_subdirectory(test)
 endif()
 
@@ -110,7 +104,7 @@ include(cmake/PackageProject.cmake)
 # we know we want to ship
 TrailAssist_package_project(
   TARGETS
-  intro
+  trailassist
   TrailAssist_options
   TrailAssist_warnings
   # FIXME: this does not work! CK
