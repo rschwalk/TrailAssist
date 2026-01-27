@@ -209,7 +209,7 @@ macro(TrailAssist_local_options)
   endif()
 
   if(TrailAssist_ENABLE_CPPCHECK)
-    TrailAssist_enable_cppcheck(${TrailAssist_WARNINGS_AS_ERRORS} "" # override cppcheck options
+    TrailAssist_enable_cppcheck(${TrailAssist_WARNINGS_AS_ERRORS} "--check-level=exhaustive" # override cppcheck options
     )
   endif()
 

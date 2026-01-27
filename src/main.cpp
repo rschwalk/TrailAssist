@@ -31,9 +31,11 @@ int main(int argc, const char **argv)
 
     spdlog::info("Hello to TrailAssist!");
 
-    std::vector<int> const hut_distances{1,2};
+    const std::vector<int> hut_distances{11, 16, 5, 5, 12, 10};
 
-    int distance = TrailAssist::calculate_daily_distance(hut_distances);
+    constexpr TrailAssist::Trail days{3};
+
+    int distance = TrailAssist::calculate_daily_distance(hut_distances, days);
 
     spdlog::info(fmt::format("Optimized max daily distance: {}", distance));
 
