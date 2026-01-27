@@ -30,12 +30,18 @@ add_test(NAME cli.version_matches COMMAND intro --version)
 set_tests_properties(cli.version_matches PROPERTIES PASS_REGULAR_EXPRESSION "${PROJECT_VERSION}")
 
 add_executable(tests tests.cpp
-        ../include/TrailAssist/trail_calculator.h)
+#        ../src/trail_calculator.h
+        ../src/trail_calculator.cpp)
 target_link_libraries(
   tests
   PRIVATE TrailAssist::TrailAssist_warnings
           TrailAssist::TrailAssist_options
           Catch2::Catch2WithMain)
+
+target_include_directories(
+        tests
+        PRIVATE "../src"
+)
 
 if(WIN32 AND BUILD_SHARED_LIBS)
   add_custom_command(

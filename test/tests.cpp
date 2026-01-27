@@ -1,9 +1,14 @@
 #include <catch2/catch_test_macros.hpp>
 
+#include <vector>
+#include "trail_calculator.h"
 
 
-
-TEST_CASE("Factorials are computed", "[factorial]")
+TEST_CASE("Calculated distance has the expected result", "[distance]")
 {
-  REQUIRE(true);
+
+  std::vector<int> const hut_distances{11, 16, 5, 5, 12, 10};
+
+  const int distance = TrailAssist::calculate_daily_distance(hut_distances);
+  REQUIRE(distance == 26);
 }

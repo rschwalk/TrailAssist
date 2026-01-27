@@ -19,7 +19,7 @@ project(
   TrailAssist
   VERSION 0.0.1
   DESCRIPTION ""
-  HOMEPAGE_URL "https://github.com/rschwalk/TrailAssist"
+  HOMEPAGE_URL "https://codeberg.org/rschwalk/TrailAssist"
   LANGUAGES CXX C)
 
 include(cmake/PreventInSourceBuilds.cmake)

@@ -12,11 +12,9 @@
 // the source template at `configured_files/config.hpp.in`.
 #include <internal_use_only/config.hpp>
 #include <string>
+#include <vector>
 
-
-namespace {
-
-}// namespace
+#include "trail_calculator.h"
 
 // NOLINTNEXTLINE(bugprone-exception-escape)
 int main(int argc, const char **argv)
@@ -29,19 +27,15 @@ int main(int argc, const char **argv)
     bool show_version = false;
     app.add_flag("--version", show_version, "Show version information");
 
-    bool is_turn_based = false;
-    auto *turn_based = app.add_flag("--turn_based", is_turn_based);
-
-    bool is_loop_based = false;
-    auto *loop_based = app.add_flag("--loop_based", is_loop_based);
-
-    turn_based->excludes(loop_based);
-    loop_based->excludes(turn_based);
-
-
     CLI11_PARSE(app, argc, argv);
 
     spdlog::info("Hello to TrailAssist!");
+
+    std::vector<int> const hut_distances{1,2};
+
+    int distance = TrailAssist::calculate_daily_distance(hut_distances);
+
+    spdlog::info(fmt::format("Optimized max daily distance: {}", distance));
 
   } catch (const std::exception &e) {
     spdlog::error("Unhandled exception in main: {}", e.what());
