@@ -12,7 +12,7 @@ namespace TrailAssist {
 
 void calculate_daily_distance_from_file(const std::string &filename);
 int calculate_daily_distance(const std::vector<int> &hut_distances, const int days);
-bool check_hike_possibility(const std::vector<int> &hut_distances, const int max_day_distance, const int days);
+bool check_hike_possibility(const int days, const std::vector<int> &hut_distances, const int max_day_distance);
 void print_result(const std::vector<int> &hut_distances, const int max_day_distance);
 
 }// namespace TrailAssist

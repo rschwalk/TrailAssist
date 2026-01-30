@@ -26,7 +26,7 @@ int TrailAssist::calculate_daily_distance(const std::vector<int> &hut_distances,
   while (max_possible_distance > min_possible_distance) {
 
     if (const int middle = (min_possible_distance + max_possible_distance) / 2;
-      check_hike_possibility(hut_distances, middle, days)) {
+      check_hike_possibility(days, hut_distances, middle)) {
       max_possible_distance = middle;
     } else {
       min_possible_distance = middle + 1;
@@ -36,9 +36,10 @@ int TrailAssist::calculate_daily_distance(const std::vector<int> &hut_distances,
   return min_possible_distance;
 }
 
-bool TrailAssist::check_hike_possibility(const std::vector<int> &hut_distances,
-  const int max_day_distance,
-  const int days)
+bool TrailAssist::check_hike_possibility(
+  const int days,
+  const std::vector<int> &hut_distances,
+  const int max_day_distance)
 {
   auto day_count{ 1 };
   auto current_distance{ 0 };
