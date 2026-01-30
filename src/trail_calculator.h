@@ -14,8 +14,8 @@ struct Trail
   int days;
   std::vector<int> hut_distances;
 
-  int calculate_daily_distance() const;
-  bool check_hike_possibility(const int max_day_distance) const;
+  [[nodiscard]] int calculate_daily_distance() const;
+  [[nodiscard]] bool check_hike_possibility(const int max_day_distance) const;
   void print_result(const int max_day_distance) const;
 };
 void calculate_daily_distance_from_file(const std::string &filename);

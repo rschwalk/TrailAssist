@@ -20,25 +20,17 @@ int TrailAssist::Trail::calculate_daily_distance() const
   //
   const auto min_possible_distance_at = std::ranges::max_element(hut_distances.begin(), hut_distances.end());
   int min_possible_distance = *min_possible_distance_at;
-  std::cout << "min_possible_distance: " << min_possible_distance << "\n";
 
   // NOLINTNEXTLINE(boost-use-ranges)
   int max_possible_distance = std::accumulate(hut_distances.begin(), hut_distances.end(), 0);
-  std::cout << "max_possible_distance: " << max_possible_distance << "\n";
 
   while (max_possible_distance > min_possible_distance) {
 
-    std::cout << "-- while start -- \n";
-    if (const int middle = (min_possible_distance + max_possible_distance) / 2;
-      check_hike_possibility(middle)) {
-      std::cout << "middle: " << middle << "\n";
+    if (const int middle = (min_possible_distance + max_possible_distance) / 2; check_hike_possibility(middle)) {
       max_possible_distance = middle;
-      } else {
-        min_possible_distance = middle + 1;
-      }
-    std::cout << "min_possible_distance: " << min_possible_distance << "\n";
-    std::cout << "max_possible_distance: " << max_possible_distance << "\n";
-    std::cout << "-- while end -- \n";
+    } else {
+      min_possible_distance = middle + 1;
+    }
   }
 
   return min_possible_distance;
@@ -70,11 +62,6 @@ void TrailAssist::Trail::print_result(const int max_day_distance) const
   auto day_distance{ 0 };
   auto day_count{ 1 };
   for (const auto &hut_distance : hut_distances) {
-    std::cout << "-- for start -- \n";
-    std::cout << "-- hut_distance: " << hut_distance << "\n";
-    std::cout << "-- day_count: " << day_count << "\n";
-    std::cout << "-- day_distance: " << day_distance << "\n";
-    std::cout << "-- day_distance + hut_distance: " << day_distance + hut_distance << "\n";
     if ((day_distance + hut_distance) > max_day_distance) {
       std::cout << day_count++ << ". Tag: " << day_distance << " km\n";
       day_distance = hut_distance;
@@ -82,10 +69,14 @@ void TrailAssist::Trail::print_result(const int max_day_distance) const
       day_distance += hut_distance;
     }
   }
-  std::cout << day_count << ". Tag: " << day_distance << " km\n";
+  if (day_count < days) {
+    auto last_day_distance = hut_distances.back();
+    std::cout << day_count++ << ". Tag: " << day_distance - last_day_distance << " km\n";
+    std::cout << day_count << ". Tag: " << last_day_distance << " km\n";
+  } else {
+    std::cout << day_count << ". Tag: " << day_distance << " km\n";
+  }
   std::cout << "\nMaximum: " << max_day_distance << " km\n";
-
-  std::cout << "\nDaycount: " << day_count << " km\n";
 }
 
 void TrailAssist::calculate_daily_distance_from_file(const std::string &filename)
@@ -140,5 +131,4 @@ void TrailAssist::calculate_daily_distance_from_file(const std::string &filename
   auto min_max_distance = trail.calculate_daily_distance();
 
   trail.print_result(min_max_distance);
-
 }
