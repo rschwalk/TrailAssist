@@ -12,9 +12,7 @@ target_link_system_libraries(
         trailassist
         PRIVATE
         CLI11::CLI11
-        fmt::fmt
-        spdlog::spdlog
-        lefticus::tools)
+        fmt::fmt)
 
 target_include_directories(
         trailassist

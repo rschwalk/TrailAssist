@@ -1,10 +1,8 @@
-#include <cstdlib>
 #include <exception>
 #include <fmt/base.h>
 #include <fmt/format.h>
 
 #include <CLI/CLI.hpp>
-#include <spdlog/spdlog.h>
 
 // This file will be generated automatically when cur_you run the CMake
 // configuration step. It creates a namespace called `TrailAssist`. You can modify
@@ -25,11 +23,9 @@ int main(int argc, const char **argv)
 
     CLI11_PARSE(app, argc, argv);
 
-    spdlog::info("Hello to TrailAssist!");
-
     TrailAssist::calculate_daily_distance_from_file(input_file);
 
   } catch (const std::exception &e) {
-    spdlog::error("Unhandled exception in main: {}", e.what());
+    std::cout << "Unhandled exception in main: " << e.what() << "\n";
   }
 }
