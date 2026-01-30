@@ -14,6 +14,11 @@
 #include "trail_calculator.h"
 
 
+TrailAssist::Trail::Trail(int days, std::vector<int> &hut_distances) :
+  days(days),
+  hut_distances(hut_distances)
+{}
+
 int TrailAssist::Trail::calculate_daily_distance() const
 {
   // Find the min needed max distance to complete the trail
@@ -88,15 +93,13 @@ void TrailAssist::calculate_daily_distance_from_file(const std::string &filename
     return;
   }
 
-  std::cout << "Input file: " << data_path << "\n";
   auto file_content = std::ifstream(data_path);
 
   if (!file_content.is_open()) { std::cerr << "Could not open file: " << data_path << "\n"; }
 
-  Trail trail;
+  std::vector<int> hut_distances;
+  Trail trail(0, hut_distances);
   int huts = 0;
-  trail.days = 0;
-  trail.hut_distances = std::vector<int>{};
   auto count = 0;
 
   try {
