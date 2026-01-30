@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <string>
 
 #include "trail_calculator.h"
 
@@ -16,7 +17,9 @@ public:
   ~AutoRestoreRdbuf() { out.rdbuf(old); }
   AutoRestoreRdbuf(const AutoRestoreRdbuf &) = delete;
   AutoRestoreRdbuf(AutoRestoreRdbuf &&) = delete;
-  explicit AutoRestoreRdbuf(std::ostream &out) : out{ out }, old{ out.rdbuf() } {}
+  explicit AutoRestoreRdbuf(std::ostream &outs) : out{ outs }, old{ out.rdbuf() } {}
+  AutoRestoreRdbuf &operator=(const AutoRestoreRdbuf &) = delete;
+  AutoRestoreRdbuf &operator=(AutoRestoreRdbuf &&) = delete;
 };
 
 std::string captureOutput(const std::function<void()> &func)
@@ -39,7 +42,8 @@ std::string captureError(const std::function<void()> &func)
 
 TEST_CASE("Calculated distance has the expected result")
 {
-  std::vector<int> hut_distances{ 11, 16, 5, 5, 12, 10 }; // NOLINT(*-avoid-magic-numbers)
+  // NOLINTNEXTLINE(*-magic-numbers)
+  std::vector<int> hut_distances{ 11, 16, 5, 5, 12, 10 }; 
   TrailAssist::Trail const trail(3, hut_distances);
 
   const int distance = trail.calculate_daily_distance();

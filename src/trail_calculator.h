@@ -11,8 +11,8 @@ namespace TrailAssist {
 
 struct Trail
 {
-  int days;
-  std::vector<int> hut_distances;
+  int m_days;
+  std::vector<int> m_hut_distances;
 
   Trail(int days, std::vector<int> &hut_distances);
   Trail(const Trail &trail) = delete;
