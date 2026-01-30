@@ -1,4 +1,6 @@
-add_executable(trailassist main.cpp
+add_executable(
+        trailassist
+        main.cpp
         trail_calculator.cpp)
 
 target_link_libraries(
